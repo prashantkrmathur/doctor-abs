@@ -90,7 +90,11 @@ export class TimeSlotService {
     } catch (error) {
       console.log("Error while creating a new time slot", error);
       // Handle any errors that occur during the creation process
-      return { statusCode: 400, message: error.message, data: null };
+      if (error instanceof BadRequestException || error instanceof NotFoundException) {
+        throw error; // Re-throw known exceptions
+      }
+      // For any other errors, return a generic error response
+      return { statusCode: 400, data: null };
     }
   }
 }
