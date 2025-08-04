@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
 import { Doctor } from './doctor.entity';
 import { TimeSlot } from './time-slot.entity';
+import { User } from './user.entity';
 
 // Database schema for Appointment Table
 @Entity()
@@ -28,6 +29,9 @@ export class Appointment {
 
   @ManyToOne(() => TimeSlot, (timeSlot) => timeSlot.appointments)  // Many appointments can belong to one time slot
   timeSlot: TimeSlot;
+
+  @ManyToOne(()=> User, (user) => user.appointments) // Many appointments can belong to one user
+  user: User;
 
   @CreateDateColumn()
   createdAt: Date;

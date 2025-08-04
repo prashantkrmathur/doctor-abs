@@ -21,6 +21,15 @@ async function bootstrap() {
     .setTitle('Doctor Appointment Booking System')
     .setDescription('API for managing doctors, time slots, and appointments')
     .setVersion('1.0')
+    
+    // .addBasicAuth(
+    //   {
+    //     type: 'http',
+    //     scheme: 'basic',
+    //   },
+    //   'basic-auth',
+    // )
+    .addTag('User', 'Endpoints for managing users')
     .addTag('Doctor', 'Endpoints for managing doctors')
     .addTag('TimeSlot', 'Endpoints for managing time slots')
     .addTag('Appointment', 'Endpoints for managing appointments')
