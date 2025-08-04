@@ -6,7 +6,7 @@ import { CreateTimeSlotDto } from './dto/create-time-slot.dto';
 export class TimeSlotController {
   constructor(private readonly timeSlotService: TimeSlotService) {}
 
-  @Post()
+  @Post('/doctor')
   async createTimeSlot(@Body() createTimeSlotDto: CreateTimeSlotDto) {
     return this.timeSlotService.createTimeSlot(createTimeSlotDto);
   }

@@ -1,4 +1,4 @@
-import { IsDate, IsNotEmpty, IsString, IsUUID } from "class-validator";
+import { IsDate, IsDateString, IsNotEmpty, IsString, IsUUID } from "class-validator";
 
 export class CreateTimeSlotDto {
     @IsNotEmpty()
@@ -6,10 +6,10 @@ export class CreateTimeSlotDto {
     doctorId: string;
 
     @IsNotEmpty()
-    @IsDate()
+    @IsDateString()
     startTime: Date;
 
     @IsNotEmpty()
-    @IsDate()
+    @IsDateString()
     endTime: Date;
 }

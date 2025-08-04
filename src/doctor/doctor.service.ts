@@ -111,7 +111,7 @@ export class DoctorService {
 
       // Filter available (not booked) and future time slots
       let availableTimeSlots = doctor.timeSlots.filter(
-        (slot) => !slot.isAvailable && slot.startTime > new Date(),
+        (slot) => slot.isAvailable && slot.startTime > new Date(),
       );
 
       if (availableTimeSlots.length === 0) {
