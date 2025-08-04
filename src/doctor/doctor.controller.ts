@@ -31,13 +31,13 @@ export class DoctorController {
     return this.doctorService.findAllDoctors(query);
   }
 
-  @Get(':id/available/time-slots')
+  @Get('/available/time-slots/:doctorId')
   @ApiOperation({ summary: 'Get available time slots for a doctor' })
   @ApiParam({ name: 'id', description: 'Doctor UUID' })
   @ApiQuery({ name: 'date', required: false, type: String })
   @ApiResponse({ status: 200, description: 'Doctor availability fetched successfully', type: [TimeSlot] })
   @ApiResponse({ status: 404, description: 'Doctor or time slots not found' })
-  findAvailability(@Param('id') id: string, @Query() query: GetTimeSlotsQueryDto) {
+  findAvailability(@Param('doctorId') id: string, @Query() query: GetTimeSlotsQueryDto) {
     return this.doctorService.findDoctorAvailability(id, query);
   }
 }
