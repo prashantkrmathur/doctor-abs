@@ -81,14 +81,43 @@ export class AppointmentService {
     }
   }
 
-  async findAllAppointments() {
+  async findAllAppointments(query: {
+    page?: number;
+    limit?: number;
+    status?: string;
+    doctorId?: string;
+  }) {
     try {
-      const appointments = await this.appointmentRepository.find({
+      const page = query.page || 1;
+      const limit = query.limit || 10;
+      const skip = (page - 1) * limit;
+  
+      const where: any = {};
+  
+      if (query.status) where.status = query.status;
+      if (query.doctorId) where.doctor = { id: query.doctorId };
+  
+      const [appointments, total] = await this.appointmentRepository.findAndCount({
         relations: ['doctor', 'timeSlot'],
+        where,
+        skip,
+        take: limit,
+        order: { createdAt: 'DESC' },
       });
-      return { statusCode: 200, message: 'Appointments retrieved successfully', data: appointments };
+  
+      return {
+        statusCode: 200,
+        message: 'Appointments retrieved successfully',
+        data: appointments,
+        pagination: {
+          total,
+          page,
+          limit,
+          totalPages: Math.ceil(total / limit),
+        },
+      };
     } catch (error) {
       throw new BadRequestException('An error occurred while retrieving appointments.');
     }
-  }
+  }  
 }
