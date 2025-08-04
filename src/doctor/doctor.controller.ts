@@ -27,9 +27,11 @@ export class DoctorController {
     });
   }
 
-  @Get(':id')
-  findDoctorAvailability(@Param('id') id: string) {
-    return this.doctorService.findDoctorAvailability(+id);
+  @Get(':id/time-slots')
+  findDoctorAvailability(
+    @Query('Date') date:string,
+    @Param('id') id: string) {
+    return this.doctorService.findDoctorAvailability(id, {date});
   }
 
 }
