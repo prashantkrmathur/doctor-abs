@@ -27,7 +27,7 @@ export class DoctorController {
     });
   }
 
-  @Get(':id/time-slots')
+  @Get(':id/available/time-slots')
   findDoctorAvailability(
     @Query('Date') date:string,
     @Param('id') id: string) {

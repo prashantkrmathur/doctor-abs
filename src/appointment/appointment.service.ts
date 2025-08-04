@@ -41,7 +41,7 @@ export class AppointmentService {
       const overlappingSlot = await this.timeSlotRepository
         .createQueryBuilder('timeSlot')
         .where('timeSlot.doctorId = :doctorId', { doctorId })
-        .andWhere('timeSlot.isBooked = :isBooked', { isBooked: true })
+        .andWhere('timeSlot.isAvailable = :isAvailable', { isAvailable: false })
         .andWhere(
           '(:startTime BETWEEN timeSlot.startTime AND timeSlot.endTime OR :endTime BETWEEN timeSlot.startTime AND timeSlot.endTime)',
           { startTime: timeSlot.startTime, endTime: timeSlot.endTime },
@@ -73,6 +73,7 @@ export class AppointmentService {
 
       return {statusCode: 201, message: 'Appointment created successfully', data: createdAppointment };
     } catch (error) {
+      console.log("error while creating appointment", error);
       if (error instanceof BadRequestException || error instanceof ConflictException) {
         throw error; // Re-throw known exceptions
       }
