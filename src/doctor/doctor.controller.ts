@@ -12,7 +12,7 @@ import { TimeSlot } from '../entities/time-slot.entity';
 export class DoctorController {
   constructor(private readonly doctorService: DoctorService) {}
 
-  @Post()
+  @Post('/addnew')
   @ApiOperation({ summary: 'Create a new doctor' })
   @ApiResponse({ status: 201, description: 'Doctor created successfully', type: Doctor })
   @ApiResponse({ status: 400, description: 'Bad request' })

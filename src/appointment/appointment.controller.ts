@@ -10,7 +10,7 @@ import { Appointment } from '../entities/appointment.entity';
 export class AppointmentController {
   constructor(private readonly appointmentService: AppointmentService) {}
 
-  @Post('')
+  @Post('/new')
   @ApiOperation({ summary: 'Create a new appointment' })
   @ApiResponse({ status: 201, description: 'Appointment created successfully', type: Appointment })
   @ApiResponse({ status: 400, description: 'Bad request' })
@@ -37,6 +37,19 @@ export class AppointmentController {
       doctorId,
     });
   }
+
+  @Patch('/update-status/:appointmentId')
+  @ApiOperation({ summary: 'Update the status of an appointment' })
+  @ApiResponse({ status: 200, description: 'Appointment status updated successfully', type: Appointment })
+  @ApiResponse({ status: 404, description: 'Appointment not found' })
+  updateAppointmentStatus(
+    @Param('appointmentId') id: string,
+    @Body() updateAppointmentDto: UpdateAppointmentDto,
+  ) {
+    return this.appointmentService.updateAppointmentStatus(id, updateAppointmentDto);
+  }
+
+
 
   
 }

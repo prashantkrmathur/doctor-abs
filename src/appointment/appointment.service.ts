@@ -9,6 +9,7 @@ import { Repository } from 'typeorm';
 import { CreateAppointmentDto } from './dto/create-appointment.dto';
 import { Appointment } from 'src/entities/appointment.entity';
 import { TimeSlot } from 'src/entities/time-slot.entity';
+import { UpdateAppointmentDto } from './dto/update-appointment.dto';
 
 @Injectable()
 export class AppointmentService {
@@ -120,4 +121,15 @@ export class AppointmentService {
       throw new BadRequestException('An error occurred while retrieving appointments.');
     }
   }  
+
+  public async updateAppointmentStatus(
+    appointmentId: string,
+    updateAppointmentDto: UpdateAppointmentDto,
+  ){
+    try {
+      
+    } catch (error) {
+      
+    }
+  }
 }
