@@ -50,7 +50,7 @@ export class DoctorService {
       const where: any = {};
   
       if (specialization) {
-        where.specialization = specialization;
+        where.specialization = ILike(`%${specialization}%`);
       }
   
       if (name) {
