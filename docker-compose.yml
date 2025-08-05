@@ -1,0 +1,13 @@
+# docker-compose.yml
+
+version: '3.8'
+
+services:
+  app:
+    container_name: nest-app
+    build: .
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://<username>:<password>@<host>:<port>/<dbname>
