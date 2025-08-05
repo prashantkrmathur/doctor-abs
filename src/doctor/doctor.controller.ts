@@ -29,7 +29,7 @@ export class DoctorController {
   @ApiQuery({ name: 'limit', required: false, type: Number })
   @ApiQuery({ name: 'specialization', required: false, type: String })
   @ApiQuery({ name: 'name', required: false, type: String })
-  @ApiResponse({ status: 200, description: 'Doctors fetched successfully' })
+  @ApiResponse({ status: 200, description: 'Doctors fetched successfully' , type : [Doctor]})
   findAllDoctors(@Query() query: GetDoctorsQueryDto) {
     return this.doctorService.findAllDoctors(query);
   }

@@ -4,7 +4,7 @@ import { CreateAppointmentDto } from './dto/create-appointment.dto';
 import { UpdateAppointmentDto } from './dto/update-appointment.dto';
 import { ApiBearerAuth, ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Appointment } from '../entities/appointment.entity';
-import { AuthGuard } from 'src/auth/jwt/jwt-auth.guard';
+import { AuthGuard } from '../auth/jwt/jwt-auth.guard';
 
 @ApiTags('Appointment')
 @ApiBearerAuth('jwt-auth')
@@ -27,6 +27,7 @@ export class AppointmentController {
   @ApiQuery({ name: 'limit', required: false, type: Number })
   @ApiQuery({name: 'status', required: false, type: String})
   @ApiQuery({name: 'doctorId', required: false, type: String})
+  @ApiResponse({ status: 200, description: 'Appointments fetched successfully', type: [Appointment] })
   findAllAppointments(
     @Query('page') page?: number,
     @Query('limit') limit?: number,
