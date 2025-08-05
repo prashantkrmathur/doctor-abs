@@ -21,14 +21,17 @@ async function bootstrap() {
     .setTitle('Doctor Appointment Booking System')
     .setDescription('API for managing doctors, time slots, and appointments')
     .setVersion('1.0')
-    
-    // .addBasicAuth(
-    //   {
-    //     type: 'http',
-    //     scheme: 'basic',
-    //   },
-    //   'basic-auth',
-    // )
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'Authorization',
+        in: 'header',
+      },
+      'jwt-auth', // This name will be referenced later in @ApiBearerAuth()
+    )
+    .addTag('Auth', 'Endpoints for managing users')
     .addTag('User', 'Endpoints for managing users')
     .addTag('Doctor', 'Endpoints for managing doctors')
     .addTag('TimeSlot', 'Endpoints for managing time slots')

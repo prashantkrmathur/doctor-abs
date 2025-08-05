@@ -1,11 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { TimeSlotService } from './time-slot.service';
 import { CreateTimeSlotDto } from './dto/create-time-slot.dto';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { TimeSlot } from '../entities/time-slot.entity';
+import { AuthGuard } from '../auth/jwt/jwt-auth.guard';
 
 @ApiTags('TimeSlot')
 @Controller('time-slot')
+@ApiBearerAuth('jwt-auth')
+@UseGuards(AuthGuard)
 export class TimeSlotController {
   constructor(private readonly timeSlotService: TimeSlotService) {}
 

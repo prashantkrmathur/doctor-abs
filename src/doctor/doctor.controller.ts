@@ -1,13 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseGuards } from '@nestjs/common';
 import { DoctorService } from './doctor.service';
 import { CreateDoctorDto } from './dto/create-doctor.dto';
-import { ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Doctor } from '../entities/doctor.entity';
 import { GetDoctorsQueryDto } from './dto/get-doctor-query.dto';
 import { GetTimeSlotsQueryDto } from '../time-slot/dto/get-time-slot.dto';
 import { TimeSlot } from '../entities/time-slot.entity';
+import { AuthGuard } from '../auth/jwt/jwt-auth.guard';
 
 @ApiTags('Doctor')
+@ApiBearerAuth('jwt-auth')
+@UseGuards(AuthGuard)
 @Controller('doctor')
 export class DoctorController {
   constructor(private readonly doctorService: DoctorService) {}
@@ -33,7 +36,7 @@ export class DoctorController {
 
   @Get('/available/time-slots/:doctorId')
   @ApiOperation({ summary: 'Get available time slots for a doctor' })
-  @ApiParam({ name: 'id', description: 'Doctor UUID' })
+  @ApiParam({ name: 'doctorId', description: 'Doctor UUID' })
   @ApiQuery({ name: 'date', required: false, type: String })
   @ApiResponse({ status: 200, description: 'Doctor availability fetched successfully', type: [TimeSlot] })
   @ApiResponse({ status: 404, description: 'Doctor or time slots not found' })

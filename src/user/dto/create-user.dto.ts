@@ -1,34 +1,41 @@
-import { IsEmail, IsMobilePhone, IsNotEmpty, IsNumber, IsPhoneNumber, IsString, IsStrongPassword } from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
+import { IsEmail, IsEnum, IsMobilePhone, IsNotEmpty, IsNumber, IsOptional, IsPhoneNumber, IsString, IsStrongPassword } from "class-validator";
+import { Gender } from "src/entities/user.entity";
 
 export class CreateUserDto {
-    static save(userData: CreateUserDto) {
-      throw new Error('Method not implemented.');
-    }
     @IsNotEmpty()
     @IsString()
+    @ApiProperty({description: "Username of the user", example: "john_doe"})
     userName: string;
 
     @IsNotEmpty()
     @IsStrongPassword()
+    @ApiProperty({description: "Password of the user", example: "StrongPass123!"})
     password: string;
 
     @IsNotEmpty()
     @IsEmail()
+    @ApiProperty({description: "Email of the user", example: "john.doe@example.com"})
     email: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsMobilePhone()
+    @ApiProperty({description: "Mobile phone number of the user", example: "+91 1234567890"})
     mobile?: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsNumber()
+    @ApiProperty({description: "Age of the user", example: 25})
     age?: Number;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
+    @ApiProperty({description: "Address of the user", example: "123 Main St, City, Country"})
     address?: string;
 
-
-
+    @IsOptional()
+    @IsEnum(Gender)
+    @ApiProperty({description: "Gender of the user", example: "Male", enum: Gender})
+    gender?:Gender
 
 }

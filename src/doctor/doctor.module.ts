@@ -4,10 +4,11 @@ import { DoctorController } from './doctor.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Doctor } from '../entities/doctor.entity';
 import { TimeSlot } from '../entities/time-slot.entity';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Doctor, TimeSlot])],
   controllers: [DoctorController],
-  providers: [DoctorService, ],
+  providers: [DoctorService, JwtService ],
 })
 export class DoctorModule {}

@@ -24,18 +24,18 @@ export class UserService {
 
   public async findUserByEmail(email: string) {
     try {
-      const user = await this.userRepository.find({
-        where: {email}
-      })
-      console.log("get user by email", user);
-      return user
+      return await this.userRepository.findOne({
+        where: { email },
+        select: ['id', 'userName', 'email', 'password', 'role'], // include password
+      });
+
     } catch (error) {
       console.log("error while fetching user by email", error)
       return error.message
     }
   }
 
-  public async findUserByMobile(mobile : Number) {
+  public async findUserByMobile(mobile : string) {
     try {
       const user = await this.userRepository.findOne({
         where: {mobile}

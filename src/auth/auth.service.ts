@@ -25,7 +25,7 @@ export class AuthService {
         ...registerUserDto,
         password: hashedPassword,
       };
-      const user = this.userService.createUser(userData);
+      const user = await this.userService.createUser(userData);
       return { statusCode: 201, data: user };
     } catch (error) {
       console.log('error while creating a new user', error);
@@ -41,11 +41,13 @@ export class AuthService {
         return { status: 400, message: 'User not found' };
       }
       console.log('check password', password);
+      console.log('storedPassword', user.password);
 
       const isPasswordMatch = await this.validatePassword(
         password,
         user.password,
       );
+      console.log("isPasswordMatch", isPasswordMatch)
       if (!isPasswordMatch) {
         return { status: 400, message: 'Invalid password' };
       }
@@ -54,6 +56,7 @@ export class AuthService {
       const token = await this.jwtService.signAsync(payload, {
         secret: secretKey,
       });
+      console.log("token", token)
       return { status: 200, message: 'Login success', token: token };
     } catch (error) {
       console.log('error while login the user', error);
