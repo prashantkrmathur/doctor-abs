@@ -15,15 +15,6 @@ export class AuthController {
   }
 
   @Post('login')
-  @ApiBody({
-    schema: {
-      type: 'object',
-      properties: {
-        username: { type: 'string' },
-        password: { type: 'string' },
-      },
-    },
-  })
   async login(@Body() loginUserDto: LoginUserDto){
     return await this.authService.loginUser(loginUserDto)
   }
