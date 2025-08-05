@@ -33,13 +33,13 @@ export class User {
     mobile:string;
 
     @Column()
-    age:Number;
+    age?:Number;
 
     @Column({type:"enum", enum: Gender, default: Gender.Male})
     gender: Gender
 
     @Column()
-    address: string;
+    address?: string;
 
     @OneToMany(()=> Appointment, (appointment) => appointment.user) // One user can have multiple appointments
     appointments: Appointment[];
