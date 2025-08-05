@@ -6,7 +6,7 @@ dotenvConfig({ path: '.env' });
 
 const config = {
     type: 'postgres',
-    url: `${process.env.DATABASE_URL}`,
+    url: `postgresql://${process.env.POSTGRES_USER}:${process.env.POSTGRES_PASSWORD}@${process.env.RAILWAY_PRIVATE_DOMAIN}:5432/${process.env.POSTGRES_DB}`,
     // host: `${process.env.DATABASE_HOST}`,
     // port: `${process.env.DATABASE_PORT}`,
     // username: `${process.env.DATABASE_USERNAME}`,
