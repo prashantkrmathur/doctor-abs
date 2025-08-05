@@ -10,4 +10,4 @@ services:
     ports:
       - "3000:3000"
     environment:
-      DATABASE_URL: postgres://<username>:<password>@<host>:<port>/<dbname>
+      DATABASE_URL: postgresql://postgres:wiBMYkdknLqNLKylqhkJLGmWvvHJHoJv@postgres.railway.internal:5432/railway
